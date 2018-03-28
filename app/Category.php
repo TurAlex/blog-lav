@@ -9,7 +9,7 @@ class Category extends Model
 {
 	use Sluggable;
 	
-	protected $fillable = ['title', 'description' ];
+	protected $fillable = ['title', 'description', 'slug'];
 	
 	public function posts(){
     	return $this->hasMany(Post::class);

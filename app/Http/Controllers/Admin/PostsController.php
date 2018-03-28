@@ -81,6 +81,7 @@ class PostsController extends Controller {
 			'title' => 'required',
 			'content' => 'required',
 			'intro' => 'required',
+			'slug' => 'required|unique:posts',
 			'image' => 'nullable|image',
 		]);
 		$post = Post::find($id);

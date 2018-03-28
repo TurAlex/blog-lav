@@ -20,7 +20,7 @@ class CategoriesController extends Controller
 	}
 	
 	public function store( Request $request ) {
-		$this->validate($request,['title' => 'required']);
+		$this->validate($request,['title' => 'required|unique:categories']);
 		Category::create($request->all());
 		return redirect()->route('categories.index');
 	}
@@ -32,6 +32,12 @@ class CategoriesController extends Controller
 	
 	public function update( Request $request, $id  ) {
 		$category = Category::find($id);
+		$this->validate($request,[
+			'slug'    => [
+				'required',
+				Rule::unique('categories')->ignore($category->id)
+			],
+		]);
 		$category->update($request->all());
 		$category->setStatus($request->get('status'));
 		return redirect()->route('categories.index');

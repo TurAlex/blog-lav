@@ -10,7 +10,7 @@ class Tag extends Model
 {
 	use Sluggable;
 	
-	protected $fillable = ['title'];
+	protected $fillable = ['title', 'status'];
 	
 	public function posts() {
 		return $this->belongsToMany(
@@ -44,7 +44,7 @@ class Tag extends Model
 		$this->save();
 	}
 	public function toggleStatus() {
-		if ($this->status == null)
+		if ($this->status == null or $this->status == 0)
 			return $this->allow();
 		return $this->disAllow();
 	}

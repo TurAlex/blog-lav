@@ -2,13 +2,12 @@
 
 
 @section('content')
-      <section class="s-content s-content--narrow">
-
-        <div class="row">
+  <section class="s-content s-content--narrow">
+    <div class="row">
       {!! $page->content!!}
 
-
-  <form name="cForm" id="cForm" method="post" action="/sendmail" method="post">
+      @if($page->slug == 'contacts')
+        <form name="cForm" id="cForm" method="post" action="/sendmail" method="post">
     <fieldset>
       {{csrf_field()}}
       <div class="form-field">
@@ -28,7 +27,7 @@
 
     </fieldset>
   </form>
-  </div>
-
-</section>
+      @endif
+    </div>
+  </section>
 @endsection

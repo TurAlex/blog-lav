@@ -37,6 +37,10 @@
                   <label class="control-label mb-10 text-left">Название</label>
                   <input type="text" class="form-control" value="{{$category->title}}" name="title">
                 </div>
+                <div class="form-group ">
+                  <label class="control-label mb-10 text-left">Url</label>
+                  <input type="text" class="form-control" name="slug" value="{{$category->slug}}">
+                </div>
                 <div class="form-group">
                   <label class="control-label mb-10 text-left">Описание</label>
                   <textarea class="form-control" rows="5" name="description">{{$category->description}}</textarea>

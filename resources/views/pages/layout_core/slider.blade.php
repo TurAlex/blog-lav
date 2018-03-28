@@ -2,23 +2,22 @@
   <div class="col-full">
 
     <div class="featured">
-
       <div class="featured__column featured__column--big">
-        <div class="entry" style="background-image:url('/images/thumbs/featured/featured-guitarman.jpg');">
+        <div class="entry" style="background-image:url('{{$sliderPosts[0]->getImage()}}');">
 
           <div class="entry__content">
-            <span class="entry__category"><a href="/assets/#0">Music</a></span>
+            <span class="entry__category"><a href="/assets/#0">{{$sliderPosts[0]->getCategoryTitle()}}</a></span>
 
-            <h1><a href="/assets/#0" title="">What Your Music Preference Says About You and Your Personality.</a></h1>
+            <h1><a href="/assets/#0" title="">{{$sliderPosts[0]->title}}</a></h1>
 
             <div class="entry__info">
               <a href="/assets/#0" class="entry__profile-pic">
-                <img class="avatar" src="/assets/images/avatars/user-03.jpg" alt="">
+                <img class="avatar" src="{{$sliderPosts[0]->author->getAvatar()}}" alt="">
               </a>
 
               <ul class="entry__meta">
-                <li><a href="/assets/#0">John Doe</a></li>
-                <li>December 29, 2017</li>
+                <li><a href="/assets/#0">{{$sliderPosts[0]->author->name}}</a></li>
+                <li>{{$sliderPosts[0]->getDate()}}</li>
               </ul>
             </div>
           </div> <!-- end entry__content -->
@@ -28,49 +27,31 @@
 
       <div class="featured__column featured__column--small">
 
-        <div class="entry" style="background-image:url('images/thumbs/featured/featured-watch.jpg');">
+        @for($i = 1;$i<=2;$i++)
+
+        <div class="entry" style="background-image:url('{{$sliderPosts[$i]->getImage()}}');">
 
           <div class="entry__content">
-            <span class="entry__category"><a href="/assets/#0">Management</a></span>
+            <span class="entry__category"><a href="/assets/#0">{{$sliderPosts[$i]->getCategoryTitle()}}</a></span>
 
-            <h1><a href="/assets/#0" title="">The Pomodoro Technique Really Works.</a></h1>
+            <h1><a href="/assets/#0" title="">{{$sliderPosts[$i]->title}}</a></h1>
 
             <div class="entry__info">
               <a href="/assets/#0" class="entry__profile-pic">
-                <img class="avatar" src="/assets/images/avatars/user-03.jpg" alt="">
+                <img class="avatar" src="{{$sliderPosts[$i]->author->name}}" alt="">
               </a>
 
               <ul class="entry__meta">
-                <li><a href="/assets/#0">John Doe</a></li>
-                <li>December 27, 2017</li>
+                <li><a href="/assets/#0">{{$sliderPosts[$i]->author->name}}</a></li>
+                <li>{{$sliderPosts[$i]->getDate()}}</li>
               </ul>
             </div>
           </div> <!-- end entry__content -->
-
         </div> <!-- end entry -->
-
-        <div class="entry" style="background-image:url('images/thumbs/featured/featured-beetle.jpg');">
-
-          <div class="entry__content">
-            <span class="entry__category"><a href="/assets/#0">LifeStyle</a></span>
-
-            <h1><a href="/assets/#0" title="">Throwback To The Good Old Days.</a></h1>
-
-            <div class="entry__info">
-              <a href="/assets/#0" class="entry__profile-pic">
-                <img class="avatar" src="/assets/images/avatars/user-03.jpg" alt="">
-              </a>
-
-              <ul class="entry__meta">
-                <li><a href="/assets/#0">John Doe</a></li>
-                <li>December 21, 2017</li>
-              </ul>
-            </div>
-          </div> <!-- end entry__content -->
-
-        </div> <!-- end entry -->
+          @endfor
 
       </div> <!-- end featured__small -->
+
     </div> <!-- end featured -->
 
   </div> <!-- end col-full -->

@@ -38,8 +38,12 @@
                   <input type="text" class="form-control" value="{{$page->title}}" name="title" autofocus>
                 </div>
               <div class="form-group col-sm-12">
-                <label class="control-label mb-10 text-left">Текст коментария</label>
+                <label class="control-label mb-10 text-left">Содержимое страницыв</label>
                 <textarea class="form-control" rows="5" name="content">{{$page->content}}</textarea>
+              </div>
+              <div class="form-group mb-10 ">
+                {{Form::checkbox('status', '1', $page->status,['class' => 'js-switch js-switch-1', 'data-color' => '#469408', 'data-size' => 'small' ])}}
+                <label class="control-label d-block mt-10 mr-10" for="published">Опубликовано</label>
               </div>
                 <div class="form-group ">
                   <a href="{{route('pages.index')}}" type="button" class="btn btn-default btn-anim pull-left"><i class="fas fa-arrow-left pt-10"></i><span class="btn-text">Назад</span></a>

@@ -13,7 +13,7 @@ class Post extends Model {
 
 	use Sluggable;
 	
-	protected $fillable = ['title', 'content', 'intro'];
+	protected $fillable = ['title', 'content', 'intro', 'slug'];
 	
 	public function category(){
 		return $this->belongsTo(Category::class);

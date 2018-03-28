@@ -41,6 +41,10 @@
                   <label class="control-label mb-10 text-left">Содержимое страницы</label>
                   <textarea class="form-control" rows="5" name="content"></textarea>
                 </div>
+                <div class="form-group mb-10">
+                  <input name="status" id="published" type="checkbox" checked class="js-switch js-switch-1" data-color="#469408"/>
+                  <label class="control-label mb-10 mt-10 mr-10" for="published">Опубликовано</label>
+                </div>
                 <div class="form-group ">
                   <a href="{{route('pages.index')}}" type="button" class="btn btn-default btn-anim pull-left"><i class="fas fa-arrow-left pt-10"></i><span class="btn-text">Назад</span></a>
                   <button type="submit" class="btn btn-success btn-anim pull-right"><i class="icon-rocket"></i><span class="btn-text">Добавить</span></button>

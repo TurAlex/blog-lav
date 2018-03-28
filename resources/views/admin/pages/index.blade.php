@@ -38,7 +38,8 @@
                       <th style="width: 6%">ID</th>
                       <th>Название</th>
                       <th>Содержимое</th>
-                      <th style="width: 20%">Дата создания</th>
+                      <th style="width: 5%">Создан</th>
+                      <th style="width: 5%">Редакция</th>
                       <th style="width: 10%">Действие</th>
                     </tr>
                   </thead>
@@ -47,7 +48,8 @@
                       <th>ID</th>
                       <th>Название</th>
                       <th>Содержимое</th>
-                      <th>Дата создания</th>
+                      <th>Создан</th>
+                      <th>Редакция</th>
                       <th>Действие</th>
                     </tr>
                   </tfoot>
@@ -57,9 +59,15 @@
                         <td>{{$page->id}}</td>
                         <td>{{$page->title}}</td>
                         <td>{{ str_limit($page->content,30) }}</td>
-                        <td>{{$page->created_at}}</td>
+                        <td>{{$page->created_at->format('d.m.y')}}</td>
+                        <td>{{$page->updated_at->format('d.m.y')}}</td>
 
                         <td style="white-space: nowrap">
+                          @if($page->status == 1)
+                            <a href="/admin/pages/toggle/{{$page->id}}" data-toggle="tooltip" data-original-title="Снять с публикации"><button class="btn btn-danger btn-icon-anim btn-square"><i class="fas fa-lock"></i></button></a>
+                          @else
+                            <a href="/admin/pages/toggle/{{$page->id}}" data-toggle="tooltip" data-original-title="Опубликовать"><button class="btn btn-success btn-icon-anim btn-square"><i class="fas fa-lock-open"></i></button></a>
+                          @endif
                           <a href="{{route('pages.edit', $page->id)}}" data-toggle="tooltip" data-original-title="Изменить"><button class="btn btn-primary btn-icon-anim btn-square"><i class="fas fa-pencil-alt"></i></button></a>
                           {{Form::open(['route' => ['pages.destroy', $page->id], 'method' => 'delete', 'style' => 'display:inline-block'])}}
                             <button onclick="return confirm('Вы уверены что хотите удалить страницу?')" type="submit"  data-toggle="tooltip" data-original-title="Удалить" class=" btn btn-info btn-icon-anim btn-square"><i class="fas fa-trash-alt"></i></button>

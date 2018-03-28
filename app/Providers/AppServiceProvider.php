@@ -19,11 +19,14 @@ class AppServiceProvider extends ServiceProvider
 	{
 		view()->composer('layout', function ($view){
 			$view->with('popularPosts', Post::orderBy('views', 'desc')->take(6)->get());
-			$view->with('categories_data', Category::all());
-			$view->with('tags_data', Tag::all());
+			$view->with('categories_data', Category::where('status',1)->get());
+			$view->with('tags_data', Tag::where('status',1)->get());
 		});
 		view()->composer('admin.layout.left_sidebar', function ($view){
 			$view->with('lockedComments', Comment::where('status', null)->orWhere('status', 0)->count());
+		});
+		view()->composer('pages.layout_core.slider', function ($view){
+			$view->with('sliderPosts', Post::orderBy('created_at', 'desc')->where('status', 1)->take(3)->get());
 		});
 	}
 	

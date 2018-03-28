@@ -37,6 +37,10 @@
                 <label class="control-label mb-10 text-left">Название</label>
                 <input type="text" class="form-control" name="title" value="{{$post->title}}">
               </div>
+              <div class="form-group ">
+                <label class="control-label mb-10 text-left">Url</label>
+                <input type="text" class="form-control" name="slug" value="{{$post->slug}}">
+              </div>
               <div>
                 <img src="{{$post->getImage()}}" alt="image" class="img-circle" width="100">
               </div>

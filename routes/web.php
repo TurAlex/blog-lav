@@ -4,12 +4,9 @@ Route::get('/','HomeController@index');
 Route::get('/post/{slag}','HomeController@show')->name('post.show');
 Route::get('/tags/{slag}','HomeController@tag')->name('tag.show');
 Route::get('/category/{slag}','HomeController@category')->name('category.show');
+Route::get('/{slag}','HomeController@slug');
 
 Route::post('/sendmail','SendmailsController@contactMail');
-
-//PAGES
-Route::get('/contacts','PagesController@showContacts');
-Route::get('/about','PagesController@showAbout');
 
 
 Route::group(['middleware' => 'auth'], function (){
@@ -43,7 +40,8 @@ Route::group([
 	Route::get('/comments/toggle/{id}', 'CommentsController@toggle');
 	Route::get('/posts/toggle/{id}', 'PostsController@toggle');
 	Route::get('/categories/toggle/{id}', 'CategoriesController@toggle');
-	Route::get('/tags/toggle/{id}', 'CategoriesController@toggle');
+	Route::get('/tags/toggle/{id}', 'TagsController@toggle');
+	Route::get('/pages/toggle/{id}', 'PagesController@toggle');
 });
 
 

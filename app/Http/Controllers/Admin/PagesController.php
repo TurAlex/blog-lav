@@ -14,7 +14,6 @@ class PagesController extends Controller {
 	 */
 	public function index() {
 		$pages = Page::all();
-		
 		return view( 'admin.pages.index', [ 'pages' => $pages ] );
 	}
 	
@@ -49,7 +48,6 @@ class PagesController extends Controller {
 	 */
 	public function edit( $id ) {
 		$page = Page::find( $id );
-		
 		return view( 'admin.pages.edit', [ 'page' => $page ] );
 	}
 	
@@ -64,7 +62,7 @@ class PagesController extends Controller {
 	public function update( Request $request, $id ) {
 		$page = Page::find( $id );
 		$page->update( $request->all() );
-		
+		$page->setStatus($request->get('status'));
 		return redirect()->route( 'pages.index' );
 	}
 	
@@ -77,8 +75,12 @@ class PagesController extends Controller {
 	 */
 	public function destroy( $id ) {
 		Page::find( $id )->delete();
-		
 		return redirect()->route( 'pages.index' );
-		
+
+	}
+	public function toggle($id){
+		$tag = Page::find($id);
+		$tag->toggleStatus();
+		return redirect()->back();
 	}
 }

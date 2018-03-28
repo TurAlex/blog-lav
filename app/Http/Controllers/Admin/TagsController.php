@@ -15,7 +15,6 @@ class TagsController extends Controller
      */
 	public function index() {
 		$tags = Tag::all();
-		dd($tags);
 		return view('admin.tags.index',['tags' => $tags]);
 	}
 	
@@ -61,6 +60,7 @@ class TagsController extends Controller
 	public function update( Request $request, $id  ) {
 		$tag = Tag::find($id);
 		$tag->update($request->all());
+		$tag->setStatus($request->get('status'));
 		return redirect()->route('tags.index');
 	}
     /**
@@ -72,6 +72,11 @@ class TagsController extends Controller
 	public function destroy( $id ) {
 		Tag::find($id) -> delete();
 		return redirect()->route('tags.index');
-		
+	}
+	
+	public function toggle($id){
+		$tag = Tag::find($id);
+		$tag->toggleStatus();
+		return redirect()->back();
 	}
 }
