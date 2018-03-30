@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Category;
 use App\Comment;
+use App\Page;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
 		view()->composer('layout', function ($view){
 			$view->with('popularPosts', Post::orderBy('views', 'desc')->take(6)->get());
 			$view->with('categories_data', Category::where('status',1)->get());
+			$view->with('pages_data', Page::where('status',1)->get());
 			$view->with('tags_data', Tag::where('status',1)->get());
 		});
 		view()->composer('admin.layout.left_sidebar', function ($view){

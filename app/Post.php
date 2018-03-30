@@ -120,6 +120,11 @@ class Post extends Model {
 			return $this->category->title;
 		return 'Нет категории';
 	}
+	public function getCategorySlug() {
+		if ($this->category != null)
+			return $this->category->slug;
+		return 'Нет категории';
+	}
 	public function getCategoryDescription() {
 		if ($this->category != null)
 			return $this->category->description;

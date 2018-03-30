@@ -14,9 +14,10 @@ class CreateSendMailsTable extends Migration {
 		Schema::create( 'send_mails', function ( Blueprint $table ) {
 			$table->increments( 'id' );
 			$table->string( 'name' );
+			$table->string( 'phone' );
 			$table->string( 'email');
-			$table->text( 'content');
-			$table->string( 'token');
+			$table->text( 'message');
+			$table->string( 'token')->nullable();
 			$table->timestamps();
 		} );
 	}

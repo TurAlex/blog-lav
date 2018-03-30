@@ -37,6 +37,10 @@
                   <label class="control-label mb-10 text-left">Название</label>
                   <input type="text" class="form-control" value="{{$page->title}}" name="title" autofocus>
                 </div>
+              <div class="form-group ">
+                <label class="control-label mb-10 text-left">Url</label>
+                <input type="text" class="form-control" name="slug" value="{{$page->slug}}">
+              </div>
               <div class="form-group col-sm-12">
                 <label class="control-label mb-10 text-left">Содержимое страницыв</label>
                 <textarea class="form-control" rows="5" name="content">{{$page->content}}</textarea>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 use function Sodium\add;
 
 class CategoriesController extends Controller
@@ -20,7 +21,14 @@ class CategoriesController extends Controller
 	}
 	
 	public function store( Request $request ) {
-		$this->validate($request,['title' => 'required|unique:categories']);
+		$this->validate($request,[
+			'title' => [
+										'required',
+										Rule::unique('categories'),
+										Rule::unique('pages'),
+										Rule::unique('tags'),
+								 ],
+		]);
 		Category::create($request->all());
 		return redirect()->route('categories.index');
 	}
@@ -33,10 +41,18 @@ class CategoriesController extends Controller
 	public function update( Request $request, $id  ) {
 		$category = Category::find($id);
 		$this->validate($request,[
+			'title'   => [
+											'required',
+											Rule::unique('categories')->ignore($category->id),
+											Rule::unique('pages'),
+											Rule::unique('tags'),
+									 ],
 			'slug'    => [
-				'required',
-				Rule::unique('categories')->ignore($category->id)
-			],
+											'required',
+											Rule::unique('categories')->ignore($category->id),
+											Rule::unique('pages'),
+											Rule::unique('tags'),
+										],
 		]);
 		$category->update($request->all());
 		$category->setStatus($request->get('status'));

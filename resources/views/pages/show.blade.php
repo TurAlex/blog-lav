@@ -14,13 +14,11 @@
     <article class="row format-standard">
 
       <div class="s-content__header col-full">
-        <h1 class="s-content__header-title">
-          {{$post->title}}
-        </h1>
+        <h1 class="s-content__header-title">{{$post->title}}</h1>
         <ul class="s-content__header-meta">
           <li class="date">{{$post->getDate()}}</li>
           @if($post->hasCategory())
-            <li class="cat"><span>In </span><a href="{{route('category.show',$post->category->slug)}}">{{$post->getCategoryTitle()}}</a>
+            <li class="cat"><span>In </span><a href="/{{$post->category->slug}}">{{$post->getCategoryTitle()}}</a>
             </li>
           @endif
         </ul>
@@ -72,22 +70,23 @@
         <div class="s-content__pagenav">
           <div class="s-content__nav">
             @if($post->hasPrevious())
-              <a href="{{route('post.show', $post->getPrevious()->slug)}}" rel="prev">
+		          <?php $prev_post =$post->getPrevious(); ?>
+              <a href="{{route('post.show', [$prev_post->getCategorySlug(), $prev_post->slug])}}" rel="prev">
                 <div class="s-content__prev">
-                  <span>Previous Post</span>
-                  {{$post->getPrevious()->title}}
+                  <span>Предыдущий пост</span>
+                  {{$prev_post->title}}
                   <small
-                      style="display:block; font-size: 0.9rem; margin-top: 10px; font-weight: normal">{{$post->getPrevious()->getDate()}}</small>
+                      style="display:block; font-size: 0.9rem; margin-top: 10px; font-weight: normal">{{$prev_post->getDate()}}</small>
                 </div>
               </a>
             @endif
             @if($post->hasNext())
-              <a href="{{route('post.show', $post->getNext()->slug)}}" rel="next">
+		            <?php $next_post =$post->getNext(); ?>
+              <a href="{{route('post.show', [$next_post->getCategorySlug(), $next_post->slug])}}" rel="next">
                 <div class="s-content__next">
-                  <span>Next Post</span>
-                  {{$post->getNext()->title}}
-                  <small
-                      style="display:block; font-size: 0.9rem; margin-top: 10px; font-weight: normal">{{$post->getNext()->getDate()}}</small>
+                  <span>Следующий пост</span>
+                  {{$next_post->title}}
+                  <small style="display:block; font-size: 0.9rem; margin-top: 10px; font-weight: normal">{{$next_post->getDate()}}</small>
                 </div>
               </a>
             @endif

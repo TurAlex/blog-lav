@@ -37,6 +37,10 @@
                   <label class="control-label mb-10 text-left">Название</label>
                   <input type="text" class="form-control" value="{{$tag->title}}" name="title" autofocus>
                 </div>
+                <div class="form-group ">
+                  <label class="control-label mb-10 text-left">Url</label>
+                  <input type="text" class="form-control" name="slug" value="{{$tag->slug}}">
+                </div>
                 <div class="form-group mb-10 ">
                   {{Form::checkbox('status', '1', $tag->status,['class' => 'js-switch js-switch-1', 'data-color' => '#469408', 'data-size' => 'small' ])}}
                   <label class="control-label d-block mt-10 mr-10" for="published">Опубликовано</label>

@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 
 class SendMail extends Model {
-	protected $fillable = ['name', 'email', 'content'];
+	protected $fillable = ['name', 'email', 'phone', 'message'];
 	
 	public static function add($fields)
 	{
 		$sub = new static;
 		$sub->fill($fields);
 		$sub->save();
-//dd($sub);
-		
 		return $sub;
 	}
 	

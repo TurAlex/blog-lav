@@ -7,6 +7,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class PostsController extends Controller {
 	/**
@@ -39,12 +40,13 @@ class PostsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		$this->validate($request,[
-			'title' => 'required',
-			'content' => 'required',
-			'intro' => 'required',
-			'image' => 'nullable|image',
-		]);
+		$this->validate($request,
+			[
+				'title' => 'required|unique:posts',
+				'content' => 'required',
+				'intro' => 'required',
+				'image' => 'nullable|image',
+			]);
 		$post = Post::add($request->all());
 		$post ->uploadImage($request->file('image'));
 		$post->setCategory($request->get('category_id'));
@@ -63,7 +65,6 @@ class PostsController extends Controller {
 		$post = Post::find($id);
 		$tags = Tag::pluck('title','id')->all();
 		$categories = Category::pluck('title','id')->all();
-		//dd($post->category());
 		$selectedTags =  $post->tags->pluck('id');
 		return view( 'admin.posts.edit', compact('categories', 'tags', 'post', 'selectedTags')  );
 	}
@@ -77,14 +78,21 @@ class PostsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$this->validate($request,[
-			'title' => 'required',
-			'content' => 'required',
-			'intro' => 'required',
-			'slug' => 'required|unique:posts',
-			'image' => 'nullable|image',
-		]);
 		$post = Post::find($id);
+		$this->validate($request,
+			[
+				'title' => [
+											'required',
+											Rule::unique('posts')->ignore($post->id),
+										],
+				'content' => 'required',
+				'intro' => 'required',
+				'slug'    => [
+												'required',
+												Rule::unique('posts')->ignore($post->id),
+										  ],
+				'image' => 'nullable|image',
+			]);
 		$post->edit($request->all());
 		$post ->uploadImage($request->file('image'));
 		$post->setCategory($request->get('category_id'));

@@ -33,8 +33,8 @@
           <a href="/profile#profile-form"><span style="padding-right: 20px">Профиль</span></a>
           <a href="/logout"><span>Выйти</span></a>
         @else
-          <a href="/login#login-form"><span style="padding-right: 20px">Login</span></a>
-          <a href="/register#register-form"><span>Register</span></a>
+          <a href="/login#login-form"><span style="padding-right: 20px">Войти</span></a>
+          <a href="/register#register-form"><span>Зарегестрироваться</span></a>
         @endif
       </div>
 
@@ -47,20 +47,22 @@
 
       <nav class="header__nav-wrap">
 
-        <h2 class="header__nav-heading h6">Site Navigation</h2>
+        <h2 class="header__nav-heading h6">Навигация по сайту</h2>
 
         <ul class="header__nav">
-          <li class="current"><a href="/" title="">Home</a></li>
+          <li class="current"><a href="/" title="">Домой</a></li>
           <li class="has-children">
-            <a href="#">Categories</a>
+            <a href="#">Категории</a>
             <ul class="sub-menu">
               @foreach($categories_data as $m_category)
-                <li><a href="/category/{{$m_category->slug}}">{{$m_category->title}}</a></li>
+                <li><a href="/{{$m_category->slug}}">{{$m_category->title}}</a></li>
               @endforeach
             </ul>
           </li>
-          <li><a href="/about" title="">About</a></li>
-          <li><a href="contacts" title="">Contact</a></li>
+          @foreach($pages_data as $m_page)
+            <li><a href="/{{$m_page->slug}}" title="">{{$m_page->title}}</a></li>
+          @endforeach
+
         </ul> <!-- end header__nav -->
 
         <a href="/assets/#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

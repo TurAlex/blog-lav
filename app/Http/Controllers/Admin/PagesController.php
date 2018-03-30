@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class PagesController extends Controller {
 	/**
@@ -34,7 +35,16 @@ class PagesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		$this->validate( $request, [ 'title' => 'required', 'content' => 'required' ] );
+		$this->validate( $request,
+			[
+				'title' => [
+											'required',
+											Rule::unique('pages'),
+											Rule::unique('categories'),
+											Rule::unique('tags'),
+									 ],
+				'content' => 'required'
+			]);
 		Page::create( $request->all() );
 		return redirect()->route( 'pages.index' );
 	}
@@ -61,6 +71,23 @@ class PagesController extends Controller {
 	 */
 	public function update( Request $request, $id ) {
 		$page = Page::find( $id );
+		$this->validate($request,
+			[
+				'title' => [
+											'required',
+											Rule::unique('pages')->ignore($page->id),
+											Rule::unique('categories'),
+											Rule::unique('tags'),
+									 ],
+				'slug'  => [
+											'required',
+											Rule::unique('pages')->ignore($page->id),
+											Rule::unique('categories'),
+											Rule::unique('tags'),
+									 ],
+				'content' => 'required',
+				'image' => 'nullable|image',
+			]);
 		$page->update( $request->all() );
 		$page->setStatus($request->get('status'));
 		return redirect()->route( 'pages.index' );

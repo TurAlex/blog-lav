@@ -10,10 +10,10 @@
       <div class="block-1-2 block-m-full popular__posts">
         @foreach($popularPosts as $popPost)
           <article class="col-block popular__post">
-            <a href="{{route('post.show', $popPost->slug)}}" class="popular__thumb">
+            <a href="{{route('post.show', [$popPost->getCategorySlug(), $popPost->slug])}}" class="popular__thumb">
               <img src="{{$popPost->getImage()}}" alt="">
             </a>
-            <h5><a href="{{route('post.show', $popPost->slug)}}">{{$popPost->title}}</a></h5>
+            <h5><a href="{{route('post.show', [$popPost->getCategorySlug(), $popPost->slug])}}">{{$popPost->title}}</a></h5>
             <section class="popular__meta">
               <span class="popular__author"><span>By</span> <a href="/assets/#0"> {{$popPost->author->name}}</a></span>
               <span class="popular__date"><span>on</span> {{$popPost->getDate()}}</span>

@@ -10,7 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Page extends Model {
 	use Sluggable;
 	
-	protected $fillable = ['title', 'content', 'status'];
+	protected $fillable = ['title', 'content', 'status', 'slug'];
 	
 	
 	public function sluggable()

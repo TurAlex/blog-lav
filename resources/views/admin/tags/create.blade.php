@@ -38,8 +38,8 @@
                   <input type="text" class="form-control" value="" name="title" autofocus>
                 </div>
                 <div class="form-group mb-10">
-                  <input name="status" id="published" type="checkbox" checked class="js-switch js-switch-1" data-color="#469408"/>
                   <label class="control-label mb-10 mt-10 mr-10" for="published">Опубликовано</label>
+                  {{Form::checkbox('status', '1', 1,['class' => 'js-switch js-switch-1', 'data-color' => '#469408', 'data-size' => 'small' ])}}
                 </div>
                 <div class="form-group ">
                   <a href="{{route('tags.index')}}" type="button" class="btn btn-default btn-anim pull-left"><i class="fas fa-arrow-left pt-10"></i><span class="btn-text">Назад</span></a>

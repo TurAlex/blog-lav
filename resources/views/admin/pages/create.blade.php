@@ -42,7 +42,7 @@
                   <textarea class="form-control" rows="5" name="content"></textarea>
                 </div>
                 <div class="form-group mb-10">
-                  <input name="status" id="published" type="checkbox" checked class="js-switch js-switch-1" data-color="#469408"/>
+                  {{Form::checkbox('status', '1', 1,['class' => 'js-switch js-switch-1', 'data-color' => '#469408', 'data-size' => 'small' ])}}
                   <label class="control-label mb-10 mt-10 mr-10" for="published">Опубликовано</label>
                 </div>
                 <div class="form-group ">

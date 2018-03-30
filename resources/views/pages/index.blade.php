@@ -14,7 +14,7 @@
         <article class="masonry__brick entry format-standard" data-aos="fade-up">
 
           <div class="entry__thumb">
-            <a href="{{route('post.show', $post->slug)}}" class="entry__thumb-link">
+            <a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}" class="entry__thumb-link">
               <img src="{{$post->getImage()}}">
 
             </a>
@@ -24,9 +24,9 @@
             <div class="entry__header">
 
               <div class="entry__date">
-                <a href="{{route('post.show', $post->slug)}}">{{$post->getDate()}} </a>
+                <a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}">{{$post->getDate()}}" </a>
               </div>
-              <h1 class="entry__title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h1>
+              <h1 class="entry__title"><a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}">{{$post->title}}</a></h1>
 
             </div>
             <div class="entry__excerpt">
@@ -34,7 +34,7 @@
             </div>
             <div class="entry__meta">
                 <span class="entry__meta-links">
-                    <a href="{{route('category.show',$post->category->slug)}}">{{$post->getCategoryTitle()}}</a>
+                    <a href="/{{$post->category->slug}}">{{$post->getCategoryTitle()}}</a>
                 </span>
             </div>
           </div>

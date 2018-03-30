@@ -58,7 +58,7 @@
                       <tr>
                         <td>{{$page->id}}</td>
                         <td>{{$page->title}}</td>
-                        <td>{{ str_limit($page->content,30) }}</td>
+                        <td>{{ str_limit($page->content,50) }}</td>
                         <td>{{$page->created_at->format('d.m.y')}}</td>
                         <td>{{$page->updated_at->format('d.m.y')}}</td>
 

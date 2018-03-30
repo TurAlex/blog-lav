@@ -10,7 +10,7 @@ class Tag extends Model
 {
 	use Sluggable;
 	
-	protected $fillable = ['title', 'status'];
+	protected $fillable = ['title', 'status', 'slug'];
 	
 	public function posts() {
 		return $this->belongsToMany(

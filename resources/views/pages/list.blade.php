@@ -7,11 +7,11 @@
     <div class="row narrow">
       <div class="col-full s-content__header" data-aos="fade-up">
         @if(isset($category))
-          <h1>Category: {{$category->title}}</h1>
-          <p class="lead">{{$category->description}}</p>
+          <h1>{{$category->title}}</h1>
+          <p class="lead">{!! $category->description !!}</p>
         @endif
         @if(isset($tag))
-          <h1>Tag: {{$tag->title}}</h1>
+          <h1>{{$tag->title}}</h1>
         @endif
 
 
@@ -27,7 +27,7 @@
           <article class="masonry__brick entry format-standard" data-aos="fade-up">
 
             <div class="entry__thumb">
-              <a href="{{route('post.show', $post->slug)}}" class="entry__thumb-link">
+              <a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}" class="entry__thumb-link">
                 <img src="{{$post->getImage()}}">
               </a>
             </div>
@@ -36,20 +36,16 @@
               <div class="entry__header">
 
                 <div class="entry__date">
-                  <a href="{{route('post.show', $post->slug)}}">{{$post->getDate()}} </a>
+                  <a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}" ></a>
                 </div>
-                <h1 class="entry__title"><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h1>
+                <h1 class="entry__title"><a href="{{route('post.show', [$post->getCategorySlug(), $post->slug])}}">{{$post->title}}</a></h1>
 
               </div>
               <div class="entry__excerpt">
                 <p>{!! $post->intro !!}</p>
               </div>
-              <div class="entry__meta">
-                <span class="entry__meta-links">
-                    <a href="category.html">Design</a>
-                    <a href="category.html">Photography</a>
-                </span>
-              </div>
+
+
             </div>
 
           </article> <!-- end article -->

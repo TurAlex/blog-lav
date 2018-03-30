@@ -13,7 +13,7 @@ class AddStatusToTags extends Migration
      */
     public function up()
     {
-	    Schema::table('tags', function($table) {
+	    Schema::table('tags', function( Blueprint $table) {
 		    $table->boolean('status')->nullable();
 	    });
     }

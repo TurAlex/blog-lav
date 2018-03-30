@@ -34,9 +34,15 @@
 <!-- Java Script
 ================================================== -->
 <script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/js/jquery.inputmask.bundle.js"></script>
+<script src="/assets/js/phone-codes/phone.js"></script>
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
-
+<script>
+    $(document).ready(function(){
+        $(phone).inputmask({"mask": "+38(***)-***-**-**"}); //specifying options
+    });
+</script>
 </body>
 
 </html>

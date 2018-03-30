@@ -17,15 +17,19 @@ class HomeController extends Controller
 		return view('pages.index', compact('posts'));
     }
 	
-	public function show( $slug ) {
-		$post = Post::where('slug', $slug)->firstOrFail();
-	
-		return view('pages.show', compact('post'));
+	public function show( $category_slug, $post_slag) {
+		$post = Post::where('slug', $post_slag)->firstOrFail();
+		$category = Category::where('slug', $category_slug)->firstOrFail();
+		if ($category->id == $post->category_id)
+			return view('pages.show', compact('post'));
+		abort(404);
   }
 	
-	public function category($slug) {
+	
+  //TODO DELETE
+  public function category($slug) {
 		$category = Category::where('slug', $slug)->firstOrFail();
-		$posts  = $category->posts()->where('status',1)->paginate(6);
+		$posts = $category->posts()->where('status',1)->paginate(6);
 		
 		return view('pages.list', compact('posts', 'category'));
 	}
@@ -36,8 +40,17 @@ class HomeController extends Controller
 	
 		return view('pages.list', compact('posts','tag'));
   }
-	public function slug($slug) {
-		$page = Page::where('slug', $slug)->firstOrFail();
-		return view('pages.static', compact('page'));
+	//route for category and static pages
+  public function slug($slug) {
+		if ( sizeof( Page::where('slug', $slug)->get() ) ){
+			$page = Page::where('slug', $slug)->first();
+			return view('pages.static', compact('page'));
+		}
+		if ( sizeof( Category::where('slug', $slug)->get() ) ){
+			$category = Category::where('slug', $slug)->first();
+			$posts  = $category->posts()->where('status',1)->paginate(6);
+			return view('pages.list', compact('posts', 'category'));
+		}
+	  abort(404);
 	}
 }

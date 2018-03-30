@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class TagsController extends Controller
 {
@@ -34,7 +35,15 @@ class TagsController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function store( Request $request ) {
-		$this->validate($request,['title' => 'required']);
+		$this->validate($request,
+			[
+				'title' => [
+											'required',
+											Rule::unique('categories'),
+											Rule::unique('pages'),
+											Rule::unique('tags'),
+									 ],
+			]);
 		Tag::create($request->all());
 		return redirect()->route('tags.index');
 	}
@@ -59,6 +68,20 @@ class TagsController extends Controller
      */
 	public function update( Request $request, $id  ) {
 		$tag = Tag::find($id);
+		$this->validate($request,[
+			'title'   => [
+											'required',
+											Rule::unique('tags')->ignore($tag->id),
+											Rule::unique('pages'),
+											Rule::unique('categories'),
+			],
+			'slug'    => [
+											'required',
+											Rule::unique('tags')->ignore($tag->id),
+											Rule::unique('pages'),
+											Rule::unique('categories'),
+			],
+		]);
 		$tag->update($request->all());
 		$tag->setStatus($request->get('status'));
 		return redirect()->route('tags.index');
